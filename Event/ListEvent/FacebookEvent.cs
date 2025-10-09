@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Event.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Basic.Event.ListEvent
+namespace Event.ListEvent
 {
     public class FacebookEvent : BaseEvent
     {

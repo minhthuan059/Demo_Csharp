@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A54CF971-304F-4292-8237-491A41C501C8}</ProjectGuid>
+    <ProjectGuid>{B374CE8F-7966-44E3-BC90-BF25911B23F0}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Basic</RootNamespace>
-    <AssemblyName>Basic</AssemblyName>
+    <RootNamespace>Event</RootNamespace>
+    <AssemblyName>Event</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,15 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstraction\Action.cs" />
-    <Compile Include="Abstraction\IShape.cs" />
-    <Compile Include="ActionDelegate.cs" />
-    <Compile Include="Entity\Line.cs" />
-    <Compile Include="Entity\Rectangle.cs" />
+    <Compile Include="Abstractions\BaseEvent.cs" />
+    <Compile Include="ListEvent\FacebookEvent.cs" />
+    <Compile Include="ListEvent\YoutubeEvent.cs" />
+    <Compile Include="Subscriber.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UseCase\Draw.cs" />
-    <Compile Include="UseCase\Swap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
