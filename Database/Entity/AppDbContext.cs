@@ -6,7 +6,7 @@ namespace Database.Entity
     {
         public AppDbContext() : base("Name=AppDbContext")
         {
-            System.Data.Entity.Database.SetInitializer(new CreateDatabaseIfNotExists<AppDbContext>());
+            System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppDbContext>());
         }
 
         public DbSet<User> Users { get; set; }

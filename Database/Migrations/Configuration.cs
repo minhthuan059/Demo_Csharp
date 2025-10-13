@@ -21,10 +21,8 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-            if (context.Users.Any())
-            {
-                context.Users.RemoveRange(context.Users);
-            }
+            context.Users.RemoveRange(context.Users);
+
 
             context.Users.AddRange(new[]
             {
@@ -33,27 +31,26 @@
                 new User { Username = "user2", Email = "user2@gmail.com", Password = "user123" }
             });
 
-            context.SaveChanges();  
-            
-            var users = context.Users.Where(u => u.Username.Contains("user")).ToList();
+            context.SaveChanges();
 
-            if (context.Notifications.Any())
+            if (!context.Users.Any())
             {
+                var users = context.Users.Where(u => u.Username.Contains("user")).ToList();
                 context.Notifications.RemoveRange(context.Notifications);
-            }
 
-            context.SaveChanges();
+                context.SaveChanges();
 
-            foreach (var user in users)
-            {
-                context.Notifications.Add(new Notification
+                foreach (var user in users)
                 {
-                    Username = user.Username,
-                    Message = $"Hello {user.Username}, this is your first notification!",
-                    CreatedAt = DateTime.Now
-                });
+                    context.Notifications.Add(new Notification
+                    {
+                        Message = $"Hello {user.Username}, this is your first notification!",
+                        CreatedAt = DateTime.Now
+                    });
+                }
+                context.SaveChanges();
             }
-            context.SaveChanges();
+            
         }
     }
 }

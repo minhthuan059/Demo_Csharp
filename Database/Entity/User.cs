@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Database.Entity
 {
+    [Table("Users")]
     public class User
     {
         [Key]
@@ -24,11 +25,15 @@ namespace Database.Entity
         [StringLength(100)]
         public string Password { get; set; }
 
+        public virtual List<Notification> Notifications { get; set; }
+
+        [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public override string ToString()
         {
-            return $"{Id} | {Username} | {Email} | {CreatedAt}";
+            string notifications = Notifications != null ? string.Join(", ", Notifications.Select(n => n.Message)) : "No Notifications";
+            return $"USER: {Id} | {Username} | {Email} | {CreatedAt} | {notifications}";
         }
     }
 
