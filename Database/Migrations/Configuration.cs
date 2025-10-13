@@ -1,21 +1,59 @@
-﻿using System.Data.Entity.Migrations;
-using MySql.Data.EntityFramework;
-
-namespace Database.Migrations
+﻿namespace Database.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<Database.Entity.AppDbContext>
+    using Database.Entity;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<AppDbContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-
-            // Cấu hình cho MySQL
-            SetSqlGenerator("MySql.Data.MySqlClient", new MySqlMigrationSqlGenerator());
+            AutomaticMigrationsEnabled = false;
+            SetSqlGenerator("MySql.Data.MySqlClient", new MySql.Data.EntityFramework.MySqlMigrationSqlGenerator());
         }
 
-        protected override void Seed(Database.Entity.AppDbContext context)
+        protected override void Seed(AppDbContext context)
         {
-            // Dữ liệu mặc định sau khi migrate (nếu cần)
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+            //  to avoid creating duplicate seed data.
+
+            if (context.Users.Any())
+            {
+                context.Users.RemoveRange(context.Users);
+            }
+
+            context.Users.AddRange(new[]
+            {
+                new User { Username = "admin", Email = "admin@gmail.com", Password = "admin123" },
+                new User { Username = "user1", Email = "user1@gmail.com", Password = "user123" },
+                new User { Username = "user2", Email = "user2@gmail.com", Password = "user123" }
+            });
+
+            context.SaveChanges();  
+            
+            var users = context.Users.Where(u => u.Username.Contains("user")).ToList();
+
+            if (context.Notifications.Any())
+            {
+                context.Notifications.RemoveRange(context.Notifications);
+            }
+
+            context.SaveChanges();
+
+            foreach (var user in users)
+            {
+                context.Notifications.Add(new Notification
+                {
+                    Username = user.Username,
+                    Message = $"Hello {user.Username}, this is your first notification!",
+                    CreatedAt = DateTime.Now
+                });
+            }
+            context.SaveChanges();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace Database.Entity
 {
-    public class User
+    public class Notification
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,18 +17,15 @@ namespace Database.Entity
         [MaxLength(100)]
         public string Username { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Email { get; set; }
 
-        [StringLength(100)]
-        public string Password { get; set; }
+        [StringLength(1000)]
+        public string Message { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public override string ToString()
         {
-            return $"{Id} | {Username} | {Email} | {CreatedAt}";
+            return $"{Id} | {Username} | {Message} | {CreatedAt}";
         }
     }
 
