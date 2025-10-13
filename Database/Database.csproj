@@ -139,17 +139,9 @@
     <Compile Include="Entity\Notification.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\AppDbContext.cs" />
-    <Compile Include="Migrations\202510130704247_InitialCreate1.cs" />
-    <Compile Include="Migrations\202510130704247_InitialCreate1.Designer.cs">
-      <DependentUpon>202510130704247_InitialCreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202510130712584_InitialCreate2.cs" />
-    <Compile Include="Migrations\202510130712584_InitialCreate2.Designer.cs">
-      <DependentUpon>202510130712584_InitialCreate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202510130732453_InitialCreate3.cs" />
-    <Compile Include="Migrations\202510130732453_InitialCreate3.Designer.cs">
-      <DependentUpon>202510130732453_InitialCreate3.cs</DependentUpon>
+    <Compile Include="Migrations\202510130838360_InitialDB.cs" />
+    <Compile Include="Migrations\202510130838360_InitialDB.Designer.cs">
+      <DependentUpon>202510130838360_InitialDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
@@ -160,14 +152,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202510130704247_InitialCreate1.resx">
-      <DependentUpon>202510130704247_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202510130712584_InitialCreate2.resx">
-      <DependentUpon>202510130712584_InitialCreate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202510130732453_InitialCreate3.resx">
-      <DependentUpon>202510130732453_InitialCreate3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202510130838360_InitialDB.resx">
+      <DependentUpon>202510130838360_InitialDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

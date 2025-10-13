@@ -18,17 +18,15 @@ namespace Database.Entity
         [StringLength(1000)]
         public string Message { get; set; }
 
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-
-        public virtual User User { get; set; }
+        public virtual List<User> Users { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public override string ToString()
         {
-            return $"NOTIFICATION: {Id} | {this.User.Username} | {Message} | {CreatedAt}";
+            string userNames = Users != null ? string.Join(", ", Users.Select(u => u.Username)) : "No Users";
+            return $"NOTIFICATION: {Id} | {Message} | {CreatedAt} | {userNames}";
         }
     }
 

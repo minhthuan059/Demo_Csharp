@@ -43,31 +43,19 @@ namespace Database
                 }
 
 
-
-                // Thêm thông báo cho user có username chứa "user"
-                if (context.Users.Any())
+                // Tạo thông báo cho tất cả user
+                foreach (var user in context.Users.ToList())
                 {
-                    var users = context.Users.Where(u => u.Username.Contains("user")).ToList();
-                    context.Notifications.RemoveRange(context.Notifications);
-
-                    context.SaveChanges();
-
-                    foreach (var user in users)
+                    Notification notification = new Notification
                     {
-
-                        Notification nof = new Notification
-                        {
-                            UserId = user.Id,
-                            User = user,
-                            Message = $"Hello {user.Username}, this is your first notification!",
-                            CreatedAt = DateTime.Now
-                        };
-
-                        context.Notifications.Add(nof);
-
-                    }
-                    context.SaveChanges();
+                        Users = new List<User>() { user },
+                        Message = $"Hello {user.Username}, this is your notification!",
+                        CreatedAt = DateTime.Now
+                    };
+                    context.Notifications.Add(notification);
                 }
+                context.SaveChanges();
+
 
                 // Hiển thị tất cả thông báo
                 foreach (var notification in context.Notifications.ToList())
@@ -76,23 +64,27 @@ namespace Database
                 }
 
 
-                // Cập nhật thông báo cho user có username chứa "user"
-                if (context.Notifications.Any())
-                {
-                    
-                    var updateNotification = context.Notifications.Where(u => u.User.Username.Contains("user")).ToList();
-                    foreach (var notification in updateNotification)
-                    {
-                        notification.UserId = notification.User.Id;
-                        notification.Message = $"Notification to {notification.User.Username}";
-                    }
-                    context.SaveChanges();
 
-                    foreach (var notification in context.Notifications.ToList())
-                    {
-                        Console.WriteLine(notification.ToString());
-                    }
+
+                // Thêm thông báo cho user có username chứa "user"
+
+                var notificationUpdate = context.Notifications.Include(n => n.Users).Where(n => n.Users.Any(u => u.Username.Contains("user"))).ToList();
+
+               
+
+                foreach (var nof in notificationUpdate)
+                {
+                    nof.Message = $"Hello {nof.Users.First().Username}, this is your updated notification!";
                 }
+                context.SaveChanges();
+
+
+                // Hiển thị tất cả thông báo
+                foreach (var notification in context.Notifications.ToList())
+                {
+                    Console.WriteLine(notification.ToString());
+                }
+
 
                 foreach (var user in context.Users.ToList())
                 {
