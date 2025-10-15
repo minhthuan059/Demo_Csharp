@@ -15,7 +15,7 @@ namespace Clean_Architecture
     {
         static void Main(string[] args)
         {
-            IProcductRepository  repository = new InMemoryProductRepository();
+            IProductRepository  repository = new InMemoryProductRepository();
             IProductService service = new ProductService(repository);
             Product product01 = service.AddProduct("Product 1", 10.99m, 100);
             Product product02 = service.AddProduct("Product 2", 20.50m, 200);

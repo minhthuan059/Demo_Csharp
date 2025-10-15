@@ -8,6 +8,6 @@ namespace Clean_Architecture.Core.Interfaces.Repositories.Bases
 {
     public interface IUpdateRepository<T>
     {
-        T Update(T entity);
+        Task<T> Update(T entity);
     }
 }

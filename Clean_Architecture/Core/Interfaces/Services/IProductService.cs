@@ -9,9 +9,9 @@ namespace Clean_Architecture.Core.Interfaces.Services
 {
     public interface IProductService
     {
-        Product AddProduct(string name, decimal price, int stock);
-        Product UpdateProduct(Guid id, string name, decimal price, int stock);
-        void DeleteProduct(Guid id);
-        IEnumerable<Product> GetAllProducts();
+        Task<Product> AddProduct(string name, decimal price, int stock);
+        Task<Product> UpdateProduct(Guid id, string name, decimal price, int stock);
+        Task DeleteProduct(Guid id);
+        Task<IEnumerable<Product>> GetAllProducts();
     }
 }

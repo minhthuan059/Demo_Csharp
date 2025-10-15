@@ -8,6 +8,6 @@ namespace Clean_Architecture.Core.Interfaces.Repositories.Bases
 {
     public interface IGetByIdRepository<T, K>
     {
-        T GetById(K id);
+        Task<T> GetById(K id);
     }
 }

@@ -8,6 +8,6 @@ namespace Clean_Architecture.Core.Interfaces.Repositories.Bases
 {
     public interface IDeleteRepository<T>
     {
-        void Delete(T entity);
+        Task Delete(T entity);
     }
 }

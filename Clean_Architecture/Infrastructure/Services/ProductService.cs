@@ -11,24 +11,25 @@ namespace Clean_Architecture.Infrastructure.Services
 {
     public class ProductService : IProductService
     {
-        IProcductRepository _productRepository;
-        public ProductService(IProcductRepository productRepository)
+        IProductRepository _productRepository;
+        public ProductService(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
 
-        public Product AddProduct(string name, decimal price, int stock)
+        public async Task<Product> AddProduct(string name, decimal price, int stock)
         {
             var product = new Entities.Product(name, price, stock);
             _productRepository.Add(product);
             return product;
         }
 
-        public Product UpdateProduct(Guid id, string name, decimal price, int stock)
+        public async Task<Product> UpdateProduct(Guid id, string name, decimal price, int stock)
         {
-            var product = _productRepository.GetById(id);
+            var product = await _productRepository.GetById(id);
             if (product == null)
                 throw new Exception("Product not found.");
+
             product.SetName(name);
             product.UpdatePrice(price);
             product.IncreaseStock(stock-product.Stock);
@@ -36,17 +37,17 @@ namespace Clean_Architecture.Infrastructure.Services
             return product;
         }
 
-        public void DeleteProduct(Guid id)
+        public async Task  DeleteProduct(Guid id)
         {
-            var product = _productRepository.GetById(id);
+            var product = await _productRepository.GetById(id);
             if (product == null)
                 throw new Exception("Product not found.");
-            _productRepository.Delete(product);
+            await _productRepository.Delete(product);
         }
 
-        public IEnumerable<Entities.Product> GetAllProducts()
+        public async Task<IEnumerable<Entities.Product>> GetAllProducts()
         {
-            return _productRepository.GetAll();
+            return await _productRepository.GetAll();
         }
     }
 }

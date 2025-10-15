@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clean_Architecture.Core.Interfaces.Repositories.Bases
+namespace Clean_Architecture.Application.Commands.Products
 {
-    public interface IAddRepository<T>
+    internal class GetAllProductCommandHandler
     {
-        Task<T> Add(T entity);
     }
 }

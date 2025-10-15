@@ -1,27 +1,31 @@
-﻿using Clean_Architecture.Core.Interfaces.Repositories;
-using Clean_Architecture.Entities;
+﻿using Clean_Architecture.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Clean_Architecture.Core.Interfaces.Repositories;
 
 namespace Clean_Architecture.Infrastructure.Repositories.InMemory
 {
-    public class InMemoryProductRepository : IProcductRepository
+    public class InMemoryProductRepository : IProductRepository
     {
         private readonly List<Product> _products = new List<Product>();
 
-        public Product GetById(Guid id) => _products.FirstOrDefault(p => p.Id == id);
-
-        public IEnumerable<Product> GetAll() => _products;
-
-        public void Delete(Product entity)
+        public async Task<Product> GetById(Guid id) 
         {
-            _products.Remove(entity);
+            return Task.FromResult(_products.FirstOrDefault(p => p.Id == id);
+        } 
+        public async Task<IEnumerable<Product>> GetAll() => _products;
+
+        public Task Delete(Product entity)
+        {
+            Task.Run(() => {
+            
+            });
         }
 
-        public Product Update(Product entity)
+        public Task<Product> Update(Product entity)
         {
             foreach (var product in _products)
             {
@@ -30,16 +34,16 @@ namespace Clean_Architecture.Infrastructure.Repositories.InMemory
                     product.UpdatePrice(entity.Price);
                     product.IncreaseStock(entity.Stock - product.Stock);
                     product.SetName(entity.Name);
-                    return product;
+                    return Task.FromResult(product);
                 }
             }
-            return null;
+            return Task.FromResult<Product>(null);
         }
 
-        public Product Add(Product entity)
+        public Task<Product> Add(Product entity)
         {
             _products.Add(entity);
-            return entity;
+            return Task.FromResult(entity);
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Clean_Architecture.Core.Interfaces.Repositories
 {
-    public interface IProcductRepository : IGetAllRepository<Product>, 
+    public interface IProductRepository : IGetAllRepository<Product>, 
         IDeleteRepository<Product>, 
         IUpdateRepository<Product>, 
         IAddRepository<Product>,
