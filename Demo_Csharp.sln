@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clean_Architecture", "Clean_Architecture\Clean_Architecture.csproj", "{3BC48FB4-FDC6-49C2-B875-FA78D01E2F74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "..\WebApplication\WebApplication.csproj", "{8AD6385F-4FCB-42B2-BAE7-A4F355519232}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{8AD6385F-4FCB-42B2-BAE7-A4F355519232}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
