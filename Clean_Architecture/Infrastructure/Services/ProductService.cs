@@ -49,5 +49,10 @@ namespace Clean_Architecture.Infrastructure.Services
         {
             return await _productRepository.GetAll();
         }
+
+        public async Task<Entities.Product> GetProductById(Guid id)
+        {
+            return await _productRepository.GetById(id);
+        }
     }
 }

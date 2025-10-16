@@ -1,4 +1,5 @@
-﻿using Clean_Architecture.Core.Interfaces.Repositories.Bases;
+﻿using Clean_Architecture.Core.Interfaces.Repositories;
+using Clean_Architecture.Core.Interfaces.Repositories.Bases;
 using Clean_Architecture.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace Clean_Architecture.Core.Interfaces.Repositories
     public interface IProductRepository : IGetAllRepository<Product>, 
         IDeleteRepository<Product>, 
         IUpdateRepository<Product>, 
-        IAddRepository<Product>,
-        IGetByIdRepository<Product, Guid>
+        IGetByIdRepository<Product, Guid>,
+        IAddRepository<Product>
     {
     }
 }

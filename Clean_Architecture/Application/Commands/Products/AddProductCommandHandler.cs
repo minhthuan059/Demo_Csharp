@@ -1,11 +1,15 @@
-﻿using Clean_Architecture.Entities;
+﻿using Clean_Architecture.Core.Interfaces.Repositories;
+using Clean_Architecture.Entities;
 using MediatR;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Clean_Architecture.Application.Commands.Products
 {
@@ -18,9 +22,11 @@ namespace Clean_Architecture.Application.Commands.Products
             _productRepository = productRepository;
         }
 
-        public Task<Product> Handle(AddProductCommand request, CancellationToken cancellationToken)
+        public async Task<Product> Handle(AddProductCommand command, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var product = new Entities.Product(command.Name, command.Price, command.Stock);
+            await _productRepository.Add(product);
+            return product;
         }
     }
 }

@@ -25,6 +25,14 @@ namespace Clean_Architecture.Entities
             Stock = stock;
         }
 
+        public Product(Guid id, string name, decimal price, int stock)
+        {
+            Id = id;
+            Name = name;
+            Price = price;
+            Stock = stock;
+        }
+
         // Domain logic methods
         public void UpdatePrice(decimal newPrice)
         {
@@ -59,6 +67,11 @@ namespace Clean_Architecture.Entities
         public override bool Equals(object obj)
         {
             return Id == ((Product)obj).Id;
+        }
+
+        public override string ToString()
+        {
+            return $"ID: {Id}, Name: {Name}, Price: {Price}, Stock: {Stock}\n";
         }
     }
 }

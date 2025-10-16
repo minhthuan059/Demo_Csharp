@@ -12,17 +12,15 @@ namespace Clean_Architecture.Infrastructure.Repositories.InMemory
     {
         private readonly List<Product> _products = new List<Product>();
 
-        public async Task<Product> GetById(Guid id) 
+        public Task<Product> GetById(Guid id) 
         {
-            return Task.FromResult(_products.FirstOrDefault(p => p.Id == id);
+            return Task.FromResult(_products.FirstOrDefault(p => p.Id == id));
         } 
         public async Task<IEnumerable<Product>> GetAll() => _products;
 
-        public Task Delete(Product entity)
+        public Task<bool> Delete(Product entity)
         {
-            Task.Run(() => {
-            
-            });
+            return Task.FromResult(_products.Remove(entity));
         }
 
         public Task<Product> Update(Product entity)

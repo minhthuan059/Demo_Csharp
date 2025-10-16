@@ -113,7 +113,14 @@
   <ItemGroup>
     <Compile Include="Application\Commands\Products\AddProductCommand.cs" />
     <Compile Include="Application\Commands\Products\AddProductCommandHandler.cs" />
-    <Compile Include="Application\Commands\Products\IProductRepository.cs" />
+    <Compile Include="Application\Commands\Products\DeleteProductCommand.cs" />
+    <Compile Include="Application\Commands\Products\DeleteProductCommandHandler.cs" />
+    <Compile Include="Application\Commands\Products\UpdateProductCommand.cs" />
+    <Compile Include="Application\Commands\Products\UpdateProductCommandHandler.cs" />
+    <Compile Include="Application\Queries\Products\GetAllProductQuery.cs" />
+    <Compile Include="Application\Queries\Products\GetAllProductQueryHandler.cs" />
+    <Compile Include="Application\Queries\Products\GetByIdProductQuery.cs" />
+    <Compile Include="Application\Queries\Products\GetByIdProductQueryHandler.cs" />
     <Compile Include="Application\UseCases\AddProductUseCase.cs" />
     <Compile Include="Application\UseCases\DeleteProductUseCase.cs" />
     <Compile Include="Core\Entities\Product.cs" />
@@ -134,7 +141,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Application\Queries\" />
     <Folder Include="Infrastructure\Repositories\InDatabase\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
