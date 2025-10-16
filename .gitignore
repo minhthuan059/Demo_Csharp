@@ -12,3 +12,9 @@ packages/
 */*.config
 /*.user
 */*.user
+Scripts/
+/Scripts/
+*/Scripts/
+Content/
+/Content/
+*/Content/

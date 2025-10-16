@@ -1,18 +1,13 @@
 ﻿using Clean_Architecture.Application.Commands.Products;
+using Clean_Architecture.Application.Queries.Products;
 using Clean_Architecture.Core.Interfaces.Repositories;
-using Clean_Architecture.Core.Interfaces.Services;
 using Clean_Architecture.Entities;
 using Clean_Architecture.Infrastructure.Repositories.InMemory;
-using Clean_Architecture.Infrastructure.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Clean_Architecture.Application.Queries.Products;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Clean_Architecture
 {
