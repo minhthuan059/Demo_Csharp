@@ -1,0 +1,56 @@
+﻿@model WebApplication.Models.Notification
+
+@{
+    ViewBag.Title = "Edit Notification";
+}
+
+<h2>Edit Notification</h2>
+
+@using (Html.BeginForm("Edit", "Notifications", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        <label>Message</label>
+        @Html.TextAreaFor(model => model.Message, new { @class = "form-control", rows = 3 })
+        @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <label>Created At</label>
+        @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    </div>
+
+    <div class="form-group">
+        <label>Users</label>
+        <div>
+            @foreach (var user in ViewBag.Users as List<WebApplication.Models.User>)
+            {
+                var isChecked = Model.Users != null && Model.Users.Any(u => u.Id == user.Id);
+
+                <div class="form-check">
+                    <input type="checkbox"
+                           name="selectedUsers"
+                           value="@user.Id"
+                           class="form-check-input"
+                           id="user_@user.Id"
+                           @(isChecked ? "checked" : "") />
+
+                    <label for="user_@user.Id" class="form-check-label">
+                        @user.Username
+                    </label>
+                </div>
+            }
+        </div>
+        
+    </div>
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='@Url.Action("Index", "Notifications")'">
+            Cancel
+        </button>
+    </div>
+}
