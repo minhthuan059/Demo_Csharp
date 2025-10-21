@@ -7,31 +7,42 @@ using System.Threading.Tasks;
 using System.Web;
 using WebApplication.Interfaces.Repositories.Models;
 using WebApplication.Models;
+using WebApplication.Repositories;
 
 namespace WebApplication.Application.NotificationApplication
 {
     public class UpdateNotificationCommand : IRequest<Notification>
     {
         public int Id { get; set; }
-        public string NotificationName { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public string Message { get; set; }
+        public List<int> UserIds { get; set; }
     }
     public class UpdateNotificationCommandHandler : IRequestHandler<UpdateNotificationCommand, Notification>
     {
         INotificationRepository _notificationRepository;
-        public UpdateNotificationCommandHandler(INotificationRepository notificationRepository)
+
+        IUserRepository _userRepository;
+        public UpdateNotificationCommandHandler(INotificationRepository notificationRepository, IUserRepository userRepository)
         {
             _notificationRepository = notificationRepository;
+            _userRepository = userRepository;
         }
         public async Task<Notification> Handle(UpdateNotificationCommand request, CancellationToken cancellationToken)
         {
-            return await _notificationRepository.UpdateAsync(new Notification
+            var users = new List<User>();
+            foreach (var userId in request.UserIds)
+            {
+                var user = await _userRepository.GetByIdAsync(userId);
+                if (user != null)
+                {
+                    users.Add(user);
+                }
+            }
+            return await _notificationRepository.UpdateAsync(new Notification()
             {
                 Id = request.Id,
-                Notificationname = request.NotificationName,
-                Email = request.Email,
-                Password = request.Password
+                Message = request.Message,
+                Users = users
             });
         }
     }

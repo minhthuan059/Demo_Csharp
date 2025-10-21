@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web;
 using WebApplication.Interfaces.Repositories.Models;
 using WebApplication.Models;
+using WebApplication.Repositories;
 
 namespace WebApplication.Application.NotificationApplication
 {
@@ -44,7 +45,8 @@ namespace WebApplication.Application.NotificationApplication
                 Users = users,
                 CreatedAt = DateTime.UtcNow
             });
-           
+
+            return res;
         }
     }
 }

@@ -52,7 +52,7 @@ namespace WebApplication.Repositories
         public async Task<User> GetByIdAsync(int id)
         {
             
-            return await db.Users.FindAsync(id);
+            return await db.Users.FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<User> UpdateAsync(User entity)

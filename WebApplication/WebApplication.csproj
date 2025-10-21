@@ -231,7 +231,6 @@
     <Compile Include="Application\NotificationApplication\DeleteNotificationCommandHandler.cs" />
     <Compile Include="Application\NotificationApplication\GetAllNotificationQueryHandler.cs" />
     <Compile Include="Application\NotificationApplication\GetByIdNotificationQueryHandler.cs" />
-    <Compile Include="Application\NotificationApplication\INotificationRepository.cs" />
     <Compile Include="Application\NotificationApplication\UpdateNotificationCommandHandler.cs" />
     <Compile Include="Application\UserApplication\CreateUserCommandHandler.cs" />
     <Compile Include="Application\UserApplication\DeleteUserCommandHandler.cs" />
@@ -252,7 +251,7 @@
     <Compile Include="Interfaces\Repositories\BaseFeatures\IGetAllRepository.cs" />
     <Compile Include="Interfaces\Repositories\BaseFeatures\IGetByIdRepository.cs" />
     <Compile Include="Interfaces\Repositories\BaseFeatures\IUpdateRepository.cs" />
-    <Compile Include="Interfaces\Repositories\Models\INotIficationRepository.cs" />
+    <Compile Include="Interfaces\Repositories\Models\INotificationRepository.cs" />
     <Compile Include="Interfaces\Repositories\Models\IUserRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppDbContext.cs" />

@@ -36,6 +36,13 @@ namespace WebApplication
             builder.RegisterType<Mediator>().As<IMediator>().InstancePerLifetimeScope();
 
             // 🔹 3. Register ServiceFactory
+            builder.RegisterType<NotificationRepository>()
+                   .As<INotificationRepository>()
+                   .InstancePerLifetimeScope();
+
+            builder.RegisterType<UserRepository>()
+                   .As<IUserRepository>()
+                   .InstancePerLifetimeScope();
             builder.Register<ServiceFactory>(ctx =>
             {
                 var c = ctx.Resolve<IComponentContext>();
@@ -45,6 +52,7 @@ namespace WebApplication
             // 🔹 4. Register all handlers from Application assembly
             builder.RegisterAssemblyTypes(typeof(IMediator).Assembly, Assembly.GetExecutingAssembly())
                    .AsImplementedInterfaces();
+
 
             // 🔹 5. Build container
             var container = builder.Build();

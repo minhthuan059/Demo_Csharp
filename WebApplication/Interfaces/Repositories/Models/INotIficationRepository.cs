@@ -8,7 +8,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Interfaces.Repositories.Models
 {
-    public interface INoficationRepository : ICreateRepository<Notification>,
+    public interface INotificationRepository : ICreateRepository<Notification>,
         IGetByIdRepository<Notification>,
         IGetAllRepository<Notification>,
         IDeleteRepository<Notification>,

@@ -10,17 +10,25 @@ using System.Web.Mvc;
 using WebApplication.Models;
 using MediatR;
 using WebApplication.Application.NotificationApplication;
+using WebApplication.Application.UserApplication;
 
 namespace WebApplication.Controllers
 {
     public class NotificationsController : Controller
     {
-        private readonly AppDbContext db = new AppDbContext();
+
+        private readonly IMediator _mediator;
+
+        public NotificationsController(IMediator mediator)
+        {
+            _mediator = mediator;
+        }
 
         // GET: Notifications
         public async Task<ActionResult> Index()
         {
-            return View(await db.Notifications.Include(n => n.Users).ToListAsync());
+            var notifications = await _mediator.Send(new GetAllNotificationQuery());
+            return View(notifications);
         }
 
         // GET: Notifications/Details/5
@@ -30,8 +38,7 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Notification notification = await db.Notifications.Include(n => n.Users)
-                                             .FirstOrDefaultAsync(n => n.Id == id);
+            Notification notification = await _mediator.Send(new GetByIdNotificationQuery { Id = id.Value });
             if (notification == null)
             {
                 return HttpNotFound();
@@ -40,29 +47,26 @@ namespace WebApplication.Controllers
         }
 
         // GET: Notifications/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            ViewBag.Users = db.Users.ToList();
+            ViewBag.Users = await _mediator.Send(new GetAllUserQuery());
             return View();
         }
 
         // POST: Notifications/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "Id,Message")] Notification notification, int[] selectedUsers)
         {
             if (ModelState.IsValid)
             {
-                notification.Users = await db.Users
-                .Where(u => selectedUsers.Contains(u.Id))
-                .ToListAsync();
-
-                db.Notifications.Add(notification);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+               await _mediator.Send(new CreateNotificationCommand
+               {
+                    Message = notification.Message,
+                    UserIds = selectedUsers?.ToList() ?? new List<int>()
+               });
             }
 
-            return View(notification);
+            return RedirectToAction("Create");
         }
 
         // GET: Notifications/Edit/5
@@ -72,14 +76,16 @@ namespace WebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Notification notification = await db.Notifications
-                .Include(n => n.Users)
-                .FirstOrDefaultAsync(n => n.Id == id);
-            ViewBag.Users = db.Users.ToList();
+            
+
+            var notification = await _mediator.Send(new GetByIdNotificationQuery { Id = id.Value });
+
             if (notification == null)
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Users = await _mediator.Send(new GetAllUserQuery());
             return View(notification);
         }
 
@@ -89,51 +95,26 @@ namespace WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Load lại notification có Users
-                var existingNotification = await db.Notifications
-                    .Include(n => n.Users)
-                    .FirstOrDefaultAsync(n => n.Id == notification.Id);
-
-                if (existingNotification == null)
-                    return HttpNotFound();
-
-                // Cập nhật nội dung message
-                existingNotification.Message = notification.Message;
-
-                // Cập nhật danh sách user được chọn
-                existingNotification.Users.Clear();
-
-                if (selectedUsers != null && selectedUsers.Length > 0)
+                await _mediator.Send(new UpdateNotificationCommand
                 {
-                    var users = await db.Users
-                        .Where(u => selectedUsers.Contains(u.Id))
-                        .ToListAsync();
-
-                    foreach (var user in users)
-                        existingNotification.Users.Add(user);
-                }
-
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                    Id = notification.Id,
+                    Message = notification.Message,
+                    UserIds = selectedUsers?.ToList() ?? new List<int>()
+                });
             }
 
-            // Nếu lỗi, load lại danh sách users để hiển thị lại form
-            ViewBag.Users = await db.Users.ToListAsync();
-            return View(notification);
+            return RedirectToAction("Index");
         }
 
         // GET: Notifications/Delete/5
         [HttpDelete, ActionName("Delete")]
         public async Task<ActionResult> Delete(int id)
         {
-            Console.WriteLine("Delete method called with id: " + id);
-            var notification = await db.Notifications.FindAsync(id);
-            if (notification == null)
-                return HttpNotFound();
-
-            db.Notifications.Remove(notification);
-            await db.SaveChangesAsync();
-
+            var result = await _mediator.Send(new DeleteNotificationCommand { Id = id });
+            if (!result)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError, "Failed to delete notification");
+            }
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 

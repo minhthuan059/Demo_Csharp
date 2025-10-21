@@ -9,7 +9,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Repositories
 {
-    public class NotificationRepository : INoficationRepository
+    public class NotificationRepository : INotificationRepository
     {
         private readonly AppDbContext db;
 
@@ -19,7 +19,10 @@ namespace WebApplication.Repositories
         }
         public async Task<Notification> CreateAsync(Notification entity)
         {
-
+            foreach (var user in entity.Users)
+            {
+                db.Users.Attach(user);
+            }
             db.Notifications.Add(entity);
             var result = await db.SaveChangesAsync();
             if (result <= 0)
@@ -45,26 +48,36 @@ namespace WebApplication.Repositories
         public async Task<IEnumerable<Notification>> GetAllAsync()
         {
 
-            return await db.Notifications.ToListAsync();
+            return await db.Notifications.Include(n => n.Users).ToListAsync();
         }
 
         public async Task<Notification> GetByIdAsync(int id)
         {
 
-            return await db.Notifications.FindAsync(id);
+            return await db.Notifications.Include(n => n.Users).FirstOrDefaultAsync(n => n.Id == id);
         }
 
         public async Task<Notification> UpdateAsync(Notification entity)
         {
-
-            var existingNotification = await db.Notifications.FindAsync(entity.Id);
+            var existingNotification = await db.Notifications
+                .Include(n => n.Users)
+                .FirstOrDefaultAsync(n => n.Id == entity.Id);
             if (existingNotification == null)
             {
                 throw new Exception("Notification not found");
             }
             existingNotification.Message = entity.Message;
-            existingNotification.Users = entity.Users;
+            foreach(var user in entity.Users)
+            {
+                if (!existingNotification.Users.Any(u => u.Id == user.Id))
+                {
+                    db.Users.Attach(user);
+                    existingNotification.Users.Add(user);
+                }
+            }
+
             db.Entry(existingNotification).State = EntityState.Modified;
+
             var result = await db.SaveChangesAsync();
             if (result <= 0)
             {

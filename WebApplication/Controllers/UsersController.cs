@@ -90,7 +90,10 @@ namespace WebApplication.Controllers
         public async Task<ActionResult> Delete(int? id)
         {
             var result = await _mediator.Send(new DeleteUserCommand { Id = id.Value });
-
+            if (!result)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
