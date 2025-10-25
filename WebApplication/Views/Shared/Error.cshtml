@@ -1,13 +1,53 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+    var title = ViewBag.StatusCode;
+    var message = ViewBag.Message;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
+    <meta charset="utf-8" />
+    <title>Lỗi hệ thống</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            text-align: center;
+            padding-top: 10%;
+        }
+
+        .box {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            display: inline-block;
+        }
+
+        h1 {
+            color: #e74c3c;
+        }
+
+        p.dev {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 20px;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+    <div class="box">
+        <h1>@title</h1>
+        <p><strong>@message</strong></p>
+
+        @if (HttpContext.Current.IsDebuggingEnabled)
+        {
+            <hr />
+            <p class="dev">@ViewBag.StackTrace</p>
+        }
+    </div>
 </body>
 </html>

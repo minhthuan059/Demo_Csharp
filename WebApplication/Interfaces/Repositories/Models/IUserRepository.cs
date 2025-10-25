@@ -9,9 +9,9 @@ using WebApplication.Models;
 namespace WebApplication.Interfaces.Repositories.Models
 {
     public interface IUserRepository : ICreateRepository<User>, 
-        IGetByIdRepository<User>, 
+        IGetByIdRepository<User, string>, 
         IGetAllRepository<User>, 
-        IDeleteRepository<User>,
+        IDeleteRepository<User, string>,
         IUpdateRepository<User>
     {
     }

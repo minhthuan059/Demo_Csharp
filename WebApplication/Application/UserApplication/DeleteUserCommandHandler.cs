@@ -11,13 +11,13 @@ namespace WebApplication.Application.UserApplication
 {
     public class DeleteUserCommand : IRequest<bool>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 
-    public class DeleteNotificationCommandHandler : IRequestHandler<DeleteUserCommand, bool>
+    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, bool>
     {
-        IUserRepository _userRepository;
-        public DeleteNotificationCommandHandler(IUserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        public DeleteUserCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

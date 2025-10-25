@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -6,14 +7,14 @@ using System.Web;
 
 namespace WebApplication.Models
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : DbContext//: IdentityDbContext<User>
     {
         public AppDbContext() : base("Name=AppDbContext")
         {
-            // System.Data.Entity.Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppDbContext>());
-            Database.SetInitializer<AppDbContext>(null);
-            Configuration.LazyLoadingEnabled = false;
-            Configuration.ProxyCreationEnabled = false;
+            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppDbContext>());
+            //Database.SetInitializer<AppDbContext>(null);
+            //Configuration.LazyLoadingEnabled = false;
+            //Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<User> Users { get; set; }

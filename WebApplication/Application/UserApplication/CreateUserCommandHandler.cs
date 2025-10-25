@@ -16,10 +16,10 @@ namespace WebApplication.Application.UserApplication
         public string Email { get; set; }
         public string Password { get; set; }
     }
-    public class CreateNotificationCommandHandler : IRequestHandler<CreateUserCommand, User>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, User>
     {
-        IUserRepository _userRepository;
-        public CreateNotificationCommandHandler(IUserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        public CreateUserCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
@@ -27,6 +27,7 @@ namespace WebApplication.Application.UserApplication
         {
             return await _userRepository.CreateAsync(new User
             {
+                Id = Guid.NewGuid().ToString(),
                 Username = request.UserName,
                 Email = request.Email,
                 Password = request.Password,

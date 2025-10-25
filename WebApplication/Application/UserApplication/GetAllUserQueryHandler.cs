@@ -13,10 +13,10 @@ namespace WebApplication.Application.UserApplication
     public class GetAllUserQuery : IRequest<IEnumerable<User>>
     {
     }
-    public class GetAllNotificationQueryHandler : IRequestHandler<GetAllUserQuery, IEnumerable<User>>
+    public class GetAllUserQueryHandler : IRequestHandler<GetAllUserQuery, IEnumerable<User>>
     {
-        IUserRepository _userRepository;
-        public GetAllNotificationQueryHandler(IUserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        public GetAllUserQueryHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

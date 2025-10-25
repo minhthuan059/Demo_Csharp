@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySqlX.XDevAPI.Common;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -19,20 +20,39 @@ namespace WebApplication.Repositories
         }
         public async Task<Notification> CreateAsync(Notification entity)
         {
-            foreach (var user in entity.Users)
+            try
             {
-                db.Users.Attach(user);
+
+                // Lấy danh sách user ID mà notification này gửi tới
+                var userIds = entity.Users.Select(u => u.Id).ToList();
+
+                // Lấy lại user từ context hiện tại để đảm bảo cùng DbContext
+                var usersInDb = await db.Users
+                    .Where(u => userIds.Contains(u.Id))
+                    .ToListAsync();
+
+                // Gán danh sách user thật trong context
+                entity.Users = usersInDb;
+
+                // Thêm notification vào context
+                db.Notifications.Add(entity);
+
+                var result = await db.SaveChangesAsync();
+
+                if (result <= 0)
+                    throw new Exception("Failed to create Notification");
+
+                return entity;
             }
-            db.Notifications.Add(entity);
-            var result = await db.SaveChangesAsync();
-            if (result <= 0)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to create Notification");
+                Console.WriteLine(ex.InnerException?.Message ?? ex.Message);
+                throw;
             }
-            return entity;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+
+        public async Task<bool> DeleteAsync(string id)
         {
 
             var notification = await db.Notifications.FindAsync(id);
@@ -51,7 +71,7 @@ namespace WebApplication.Repositories
             return await db.Notifications.Include(n => n.Users).ToListAsync();
         }
 
-        public async Task<Notification> GetByIdAsync(int id)
+        public async Task<Notification> GetByIdAsync(string id)
         {
 
             return await db.Notifications.Include(n => n.Users).FirstOrDefaultAsync(n => n.Id == id);
@@ -59,31 +79,47 @@ namespace WebApplication.Repositories
 
         public async Task<Notification> UpdateAsync(Notification entity)
         {
-            var existingNotification = await db.Notifications
-                .Include(n => n.Users)
-                .FirstOrDefaultAsync(n => n.Id == entity.Id);
-            if (existingNotification == null)
+            try
             {
-                throw new Exception("Notification not found");
-            }
-            existingNotification.Message = entity.Message;
-            foreach(var user in entity.Users)
-            {
-                if (!existingNotification.Users.Any(u => u.Id == user.Id))
+                var existingNotification = await db.Notifications
+                    .Include(n => n.Users)
+                    .FirstOrDefaultAsync(n => n.Id == entity.Id);
+
+                if (existingNotification == null)
+                    throw new Exception("Notification not found");
+
+                // Cập nhật nội dung
+                existingNotification.Message = entity.Message;
+
+                // Lấy danh sách userId từ entity gửi lên
+                var newUserIds = entity.Users.Select(u => u.Id).ToList();
+
+                // Lấy các User thực sự từ cùng context
+                var usersInDb = await db.Users
+                    .Where(u => newUserIds.Contains(u.Id))
+                    .ToListAsync();
+
+                // Xóa các user cũ không còn trong danh sách
+                existingNotification.Users
+                    .RemoveAll(u => !newUserIds.Contains(u.Id));
+
+                // Thêm các user mới chưa có
+                foreach (var user in usersInDb)
                 {
-                    db.Users.Attach(user);
-                    existingNotification.Users.Add(user);
+                    if (!existingNotification.Users.Any(u => u.Id == user.Id))
+                        existingNotification.Users.Add(user);
                 }
+
+                await db.SaveChangesAsync();
+
+                return existingNotification;
             }
-
-            db.Entry(existingNotification).State = EntityState.Modified;
-
-            var result = await db.SaveChangesAsync();
-            if (result <= 0)
+            catch (Exception ex)
             {
-                throw new Exception("Failed to update Notification");
+                Console.WriteLine(ex.InnerException?.Message ?? ex.Message);
+                throw;
             }
-            return entity;
         }
+
     }
 }

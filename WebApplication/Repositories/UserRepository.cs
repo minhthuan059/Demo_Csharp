@@ -12,7 +12,7 @@ namespace WebApplication.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext db;
-
+       
         public UserRepository()
         {
             db = new AppDbContext();
@@ -30,9 +30,9 @@ namespace WebApplication.Repositories
             return entity;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(string id)
         {
-            
+   
             var user = db.Users.Find(id);
             if(user == null)
             {
@@ -49,7 +49,7 @@ namespace WebApplication.Repositories
             return await db.Users.ToListAsync();
         }
 
-        public async Task<User> GetByIdAsync(int id)
+        public async Task<User> GetByIdAsync(string id)
         {
             
             return await db.Users.FirstOrDefaultAsync(u => u.Id == id);
@@ -58,7 +58,7 @@ namespace WebApplication.Repositories
         public async Task<User> UpdateAsync(User entity)
         {
             
-            var existingUser = await db.Users.FindAsync(entity.Id);
+            var existingUser = db.Users.Find(entity.Id);
             if (existingUser == null)
             {
                 throw new Exception("User not found");

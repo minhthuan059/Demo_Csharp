@@ -12,13 +12,13 @@ namespace WebApplication.Application.UserApplication
 {
     public class GetByIdUserQuery : IRequest<User>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 
-    public class GetByIdNotificationQueryHandler : IRequestHandler<GetByIdUserQuery, User>
+    public class GetByIdUserQueryHandler : IRequestHandler<GetByIdUserQuery, User>
     {
-        IUserRepository _userRepository;
-        public GetByIdNotificationQueryHandler(IUserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        public GetByIdUserQueryHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }

@@ -1,9 +1,9 @@
-﻿namespace Database.Migrations
+﻿namespace WebApplication.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialDB : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -11,9 +11,9 @@
                 "dbo.Notifications",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Message = c.String(maxLength: 1000, storeType: "nvarchar"),
-                        CreatedAt = c.DateTime(nullable: false, precision: 0),
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Message = c.String(maxLength: 1000),
+                        CreatedAt = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -21,11 +21,11 @@
                 "dbo.Users",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
-                        Username = c.String(nullable: false, maxLength: 100, storeType: "nvarchar"),
-                        Email = c.String(nullable: false, maxLength: 255, storeType: "nvarchar"),
-                        Password = c.String(maxLength: 100, storeType: "nvarchar"),
-                        CreatedAt = c.DateTime(nullable: false, precision: 0),
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Username = c.String(nullable: false, maxLength: 100),
+                        Email = c.String(nullable: false, maxLength: 255),
+                        Password = c.String(maxLength: 100),
+                        CreatedAt = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -33,8 +33,8 @@
                 "dbo.UserNotifications",
                 c => new
                     {
-                        UserId = c.Int(nullable: false),
-                        NotificationId = c.Int(nullable: false),
+                        UserId = c.String(nullable: false, maxLength: 128),
+                        NotificationId = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.UserId, t.NotificationId })
                 .ForeignKey("dbo.Users", t => t.UserId, cascadeDelete: true)

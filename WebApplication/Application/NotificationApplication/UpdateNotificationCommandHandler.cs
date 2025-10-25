@@ -13,15 +13,15 @@ namespace WebApplication.Application.NotificationApplication
 {
     public class UpdateNotificationCommand : IRequest<Notification>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Message { get; set; }
-        public List<int> UserIds { get; set; }
+        public List<string> UserIds { get; set; }
     }
     public class UpdateNotificationCommandHandler : IRequestHandler<UpdateNotificationCommand, Notification>
     {
-        INotificationRepository _notificationRepository;
+        private readonly INotificationRepository _notificationRepository;
 
-        IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
         public UpdateNotificationCommandHandler(INotificationRepository notificationRepository, IUserRepository userRepository)
         {
             _notificationRepository = notificationRepository;

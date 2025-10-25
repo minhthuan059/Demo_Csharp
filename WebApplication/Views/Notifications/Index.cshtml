@@ -55,11 +55,7 @@
                         onclick="location.href='@Url.Action("Edit", "Notifications", new { id = item.Id })'">
                     Edit
                 </button>
-                @*<button class="btn btn-outline-primary btn-sm"
-                        onclick="location.href='@Url.Action("Details", "Notifications", new { id = item.Id })'">
-                    Details
-                </button>*@
-                <button class="btn btn-outline-danger btn-sm" onclick="deleteNotification(@item.Id)">Delete</button>
+                <button class="btn btn-outline-danger btn-sm" onclick="deleteNotification('@item.Id')">Delete</button>
             </td>
         </tr>
     }
@@ -67,10 +63,11 @@
 </table>
 <script>
     async function deleteNotification(id) {
+        console.log('Deleting notification with id:', id);  
         if (!confirm('Are you sure you want to delete this notification?')) return;
         try {
             const res = await fetch(`/Notifications/Delete/${id}`, {
-                method: 'DELETE'
+                method: 'GET'
             });
             if (res.ok) {
                 alert('Deleted successfully');

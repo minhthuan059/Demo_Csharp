@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Interfaces.Repositories.BaseFeatures
 {
-    public interface IDeleteRepository<T>
+    public interface IDeleteRepository<T, K>
     {
-        Task<bool> DeleteAsync(int id);
+        Task<bool> DeleteAsync(K id);
     }
 }

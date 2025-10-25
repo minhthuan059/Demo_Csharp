@@ -13,6 +13,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    
     public class UsersController : Controller
     {
         private readonly IMediator _mediator;
@@ -30,13 +31,13 @@ namespace WebApplication.Controllers
         }
 
         // GET: Users/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = await _mediator.Send(new GetByIdUserQuery { Id = id.Value });
+            var user = await _mediator.Send(new GetByIdUserQuery { Id = id });
             return View(user);
         }
 
@@ -57,17 +58,22 @@ namespace WebApplication.Controllers
                 Password = user.Password
             });
 
+            if (createdUser == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+
             return RedirectToAction("Create");
         }
 
         // GET: Users/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = await _mediator.Send(new GetByIdUserQuery { Id = id.Value });
+            var user = await _mediator.Send(new GetByIdUserQuery { Id = id });
             return View(user);
         }
 
@@ -77,19 +83,25 @@ namespace WebApplication.Controllers
         {
             var updatedUser = await _mediator.Send(new UpdateUserCommand
             {
-                Id = user.Id,
+                Id = user.Id.ToString(),
                 UserName = user.Username,
                 Email = user.Email,
                 Password = user.Password
             });
+
+            if (updatedUser == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+
             return RedirectToAction("Index");
         }
 
         // DELETE: Users/Delete/5
         [HttpDelete]
-        public async Task<ActionResult> Delete(int? id)
+        public async Task<ActionResult> Delete(string id)
         {
-            var result = await _mediator.Send(new DeleteUserCommand { Id = id.Value });
+            var result = await _mediator.Send(new DeleteUserCommand { Id = id });
             if (!result)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);

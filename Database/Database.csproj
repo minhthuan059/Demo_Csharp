@@ -139,22 +139,12 @@
     <Compile Include="Entity\Notification.cs" />
     <Compile Include="Entity\User.cs" />
     <Compile Include="Entity\AppDbContext.cs" />
-    <Compile Include="Migrations\202510130838360_InitialDB.cs" />
-    <Compile Include="Migrations\202510130838360_InitialDB.Designer.cs">
-      <DependentUpon>202510130838360_InitialDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202510130838360_InitialDB.resx">
-      <DependentUpon>202510130838360_InitialDB.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

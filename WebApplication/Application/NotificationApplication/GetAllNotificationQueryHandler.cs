@@ -15,7 +15,7 @@ namespace WebApplication.Application.NotificationApplication
     }
     public class GetAllNotificationQueryHandler : IRequestHandler<GetAllNotificationQuery, IEnumerable<Notification>>
     {
-        INotificationRepository _notificationRepository;
+        private readonly INotificationRepository _notificationRepository;
         public GetAllNotificationQueryHandler(INotificationRepository notificationRepository)
         {
             _notificationRepository = notificationRepository;

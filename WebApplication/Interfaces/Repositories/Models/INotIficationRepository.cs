@@ -9,9 +9,9 @@ using WebApplication.Models;
 namespace WebApplication.Interfaces.Repositories.Models
 {
     public interface INotificationRepository : ICreateRepository<Notification>,
-        IGetByIdRepository<Notification>,
+        IGetByIdRepository<Notification, string>,
         IGetAllRepository<Notification>,
-        IDeleteRepository<Notification>,
+        IDeleteRepository<Notification, string>,
         IUpdateRepository<Notification>
     {
     }

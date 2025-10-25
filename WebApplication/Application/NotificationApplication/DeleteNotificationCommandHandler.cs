@@ -11,12 +11,12 @@ namespace WebApplication.Application.NotificationApplication
 {
     public class DeleteNotificationCommand : IRequest<bool>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class DeleteNotificationCommandHandler : IRequestHandler<DeleteNotificationCommand, bool>
     {
-        INotificationRepository _notificationRepository;
+        private readonly INotificationRepository _notificationRepository;
         public DeleteNotificationCommandHandler(INotificationRepository notificationRepository)
         {
             _notificationRepository = notificationRepository;

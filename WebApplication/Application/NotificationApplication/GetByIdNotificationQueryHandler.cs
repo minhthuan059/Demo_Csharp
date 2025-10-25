@@ -12,12 +12,12 @@ namespace WebApplication.Application.NotificationApplication
 {
     public class GetByIdNotificationQuery : IRequest<Notification>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 
     public class GetByIdNotificationQueryHandler : IRequestHandler<GetByIdNotificationQuery, Notification>
     {
-        INotificationRepository _notificationRepository;
+        private readonly INotificationRepository _notificationRepository;
         public GetByIdNotificationQueryHandler(INotificationRepository notificationRepository)
         {
             _notificationRepository = notificationRepository;

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Interfaces.Repositories.BaseFeatures
 {
-    public interface IGetByIdRepository<T>
+    public interface IGetByIdRepository<T, K>
     {
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(K id);
     }
 }

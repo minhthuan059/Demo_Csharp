@@ -15,13 +15,13 @@ namespace WebApplication.Application.NotificationApplication
     {
 
         public string  Message { get; set; }
-        public List<int> UserIds { get; set; }
+        public List<string> UserIds { get; set; }
     }
     public class CreateNotificationCommandHandler : IRequestHandler<CreateNotificationCommand, Notification>
     {
-        INotificationRepository _notificationRepository;
+        private readonly INotificationRepository _notificationRepository;
 
-        IUserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
         public CreateNotificationCommandHandler(INotificationRepository notificationRepository, IUserRepository userRepository)
         {
             _notificationRepository = notificationRepository;
@@ -41,6 +41,7 @@ namespace WebApplication.Application.NotificationApplication
            
             var res = await _notificationRepository.CreateAsync(new Notification()
             {
+                Id = Guid.NewGuid().ToString(),
                 Message = request.Message,
                 Users = users,
                 CreatedAt = DateTime.UtcNow

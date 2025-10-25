@@ -32,13 +32,13 @@ namespace WebApplication.Controllers
         }
 
         // GET: Notifications/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Notification notification = await _mediator.Send(new GetByIdNotificationQuery { Id = id.Value });
+            Notification notification = await _mediator.Send(new GetByIdNotificationQuery { Id = id });
             if (notification == null)
             {
                 return HttpNotFound();
@@ -55,14 +55,14 @@ namespace WebApplication.Controllers
 
         // POST: Notifications/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Message")] Notification notification, int[] selectedUsers)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Message")] Notification notification, string[] selectedUsers)
         {
             if (ModelState.IsValid)
             {
                await _mediator.Send(new CreateNotificationCommand
                {
                     Message = notification.Message,
-                    UserIds = selectedUsers?.ToList() ?? new List<int>()
+                    UserIds = selectedUsers?.ToList() ?? new List<string>()
                });
             }
 
@@ -70,7 +70,7 @@ namespace WebApplication.Controllers
         }
 
         // GET: Notifications/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -78,7 +78,7 @@ namespace WebApplication.Controllers
             }
             
 
-            var notification = await _mediator.Send(new GetByIdNotificationQuery { Id = id.Value });
+            var notification = await _mediator.Send(new GetByIdNotificationQuery { Id = id });
 
             if (notification == null)
             {
@@ -91,7 +91,7 @@ namespace WebApplication.Controllers
 
         // POST: Notifications/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Message")] Notification notification, int[] selectedUsers)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Message")] Notification notification, string[] selectedUsers)
         {
             if (ModelState.IsValid)
             {
@@ -99,16 +99,16 @@ namespace WebApplication.Controllers
                 {
                     Id = notification.Id,
                     Message = notification.Message,
-                    UserIds = selectedUsers?.ToList() ?? new List<int>()
+                    UserIds = selectedUsers?.ToList() ?? new List<string>()
                 });
             }
 
             return RedirectToAction("Index");
         }
 
-        // GET: Notifications/Delete/5
-        [HttpDelete, ActionName("Delete")]
-        public async Task<ActionResult> Delete(int id)
+        // GET: Notifications/Delete/{id}
+        [HttpGet, ActionName("Delete")]
+        public async Task<ActionResult> Delete(string id)
         {
             var result = await _mediator.Send(new DeleteNotificationCommand { Id = id });
             if (!result)

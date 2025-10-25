@@ -12,15 +12,15 @@ namespace WebApplication.Application.UserApplication
 {
     public class UpdateUserCommand : IRequest<User>
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
     }
-    public class UpdateNotificationCommandHandler : IRequestHandler<UpdateUserCommand, User>
+    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User>
     {
-        IUserRepository _userRepository;
-        public UpdateNotificationCommandHandler(IUserRepository userRepository)
+        private readonly IUserRepository _userRepository;
+        public UpdateUserCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
