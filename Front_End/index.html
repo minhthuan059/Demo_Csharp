@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- Xác định tài liệu là HTML5 -->
+<html lang="en">
+  <!-- Đặt ngôn ngữ của trang là tiếng Anh -->
+
+  <head>
+    <meta charset="utf-8" />
+    <!-- Đặt bộ ký tự của trang là UTF-8 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- Thiết lập viewport để trang hiển thị tốt trên thiết bị di động -->
+    <title>Demo C# Front End</title>
+    <!-- Tiêu đề của trang -->
+    <meta
+      name="description"
+      content="Basic HTML template for Demo_Csharp Front_End"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: linear-gradient(180deg, #a0c4ff, #ffffff);
+      }
+
+		.fade-out {
+    	  opacity: 0;
+    	}
+
+      .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-clip: content-box;
+        box-shadow: inset 5px 5px 8px rgba(0, 0, 0, 0.3),
+          inset -5px -5px 8px rgba(255, 255, 255, 0.6),
+          5px 5px 15px rgba(0, 0, 0, 0.3);
+        transition: transform 0.7s ease;
+        position: absolute;
+        will-change: transform;
+      }
+
+
+      .circle:hover {
+        transform: scale(1);
+      }
+
+      #circle-01 {
+        background-color: red;
+      }
+
+      #circle-02 {
+        background-color: green;
+      }
+
+      #circle-03 {
+        background-color: blue;
+      }
+
+      #circle-04 {
+        background-color: black;
+      }
+
+	  #circle-05 {
+		background-color: yellow;
+	  }
+
+	  #circle-06 {
+		background-color: white;
+	  }
+	  
+
+	  #circle-07 {
+		background-color: rgba(red, green, blue, alpha);
+	  }
+	  
+
+    </style>
+  </head>
+
+  <body>
+    <div id="circle-01" class="circle"></div>
+
+    <div id="circle-02" class="circle"></div>
+
+    <div id="circle-03" class="circle"></div>
+
+    <div id="circle-04" class="circle"></div>
+
+	<div id="circle-05" class="circle"></div>
+	
+	<div id="circle-06" class="circle"></div>
+
+	<div id="circle-07" class="circle"></div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const gravity = 0.05; // Trọng lực
+        const bounce = 1.0; // Độ bật
+        const friction = 1; // Ma sát nhẹ
+
+        // 🔹 Lấy tất cả các phần tử có class .circle
+        const circleElements = document.querySelectorAll(".circle");
+		circleElements.forEach(circle => {
+			circle.addEventListener('click', () => {
+				circle.classList.add('fade-out');
+			});
+		});
+
+
+
+        // 🔹 Tạo danh sách quả bóng (mỗi quả là 1 object)
+        const circles = Array.from(circleElements).map((el, i) => ({
+          el,
+          x: window.innerWidth * (0.1 + 0.1 * i), // vị trí ban đầu trải đều
+          y: 0,
+          vx: (Math.random() - 0.5) * 6, // vận tốc ngang ngẫu nhiên
+          vy: 0,
+        }));
+
+        const R = circles[0].el.offsetWidth / 2;
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+
+        // 🔹 Hàm khởi tạo vị trí ban đầu
+        function initPositions() {
+          width = window.innerWidth;
+          height = window.innerHeight;
+          circles.forEach((c) => {
+            c.y = R;
+            c.el.style.left = c.x - R + "px";
+            c.el.style.top = c.y - R + "px";
+          });
+        }
+
+        // 🔹 Hàm hoạt hình (loop vô hạn)
+        function animate() {
+          circles.forEach((ball) => {
+            // Trọng lực kéo xuống
+            ball.vy += gravity;
+
+            // Cập nhật vị trí
+            ball.x += ball.vx;
+            ball.y += ball.vy;
+
+            // Va chạm đáy
+            if (ball.y + R >= height) {
+              ball.y = height - R;
+              ball.vy *= -bounce;
+            }
+
+            // Va chạm trần
+            if (ball.y - R <= 0) {
+              ball.y = R;
+              ball.vy *= -bounce;
+            }
+
+            // Va chạm tường trái/phải
+            if (ball.x + R >= width) {
+              ball.x = width - R;
+              ball.vx *= -bounce;
+            }
+            if (ball.x - R <= 0) {
+              ball.x = R;
+              ball.vx *= -bounce;
+            }
+
+            // Ma sát nhẹ
+            ball.vx *= friction;
+
+            // Cập nhật lên DOM
+            ball.el.style.left = ball.x - R + "px";
+            ball.el.style.top = ball.y - R + "px";
+          });
+
+          // Lặp lại liên tục
+          requestAnimationFrame(animate);
+        }
+
+        // Khi thay đổi kích thước cửa sổ
+        window.addEventListener("resize", () => {
+          width = window.innerWidth;
+          height = window.innerHeight;
+        });
+
+        // Bắt đầu
+        initPositions();
+        requestAnimationFrame(animate);
+      });
+    </script>
+  </body>
+</html>
