@@ -1,6 +1,9 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using MediatR;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,10 +14,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using WebApplication.App_Start;
 using WebApplication.Interfaces.Repositories.Models;
 using WebApplication.Models;
 using WebApplication.Repositories;
 using static System.Net.Mime.MediaTypeNames;
+
 
 namespace WebApplication
 {
@@ -23,41 +28,23 @@ namespace WebApplication
         protected void Application_Start()
         {
 
-            //AreaRegistration.RegisterAllAreas();
-            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            //RouteConfig.RegisterRoutes(RouteTable.Routes);
-            //BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            //Database.SetInitializer(new DropCreateDatabaseAlways<AppDbContext>());
-
-            //using (var context = new AppDbContext())
-            //{
-            //    context.Database.Initialize(force: true);
-            //}
-
-            var builder = new ContainerBuilder();
-
-            builder.RegisterControllers(Assembly.GetExecutingAssembly());
-
-            builder.RegisterType<Mediator>().As<IMediator>().InstancePerLifetimeScope();
-
-
-            builder.Register<ServiceFactory>(ctx =>
-            {
-                var c = ctx.Resolve<IComponentContext>();
-                return t => c.Resolve(t);
-            });
-
-            builder.RegisterAssemblyTypes(typeof(IMediator).Assembly, Assembly.GetExecutingAssembly())
-                   .AsImplementedInterfaces();
-
-            var container = builder.Build();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            AutofacConfig.RegisterDependencies();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            using (var context = new AppDbContext())
+            {
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+
+                if (!roleManager.RoleExists("Admin"))
+                    roleManager.Create(new IdentityRole("Admin"));
+
+                if (!roleManager.RoleExists("User"))
+                    roleManager.Create(new IdentityRole("User"));
+            }
         }
 
 

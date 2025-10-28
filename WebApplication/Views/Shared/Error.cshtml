@@ -1,53 +1,18 @@
 ﻿@{
-    Layout = null;
+    Layout = Layout;
     var title = ViewBag.StatusCode;
     var message = ViewBag.Message;
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Lỗi hệ thống</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fafafa;
-            text-align: center;
-            padding-top: 10%;
-        }
 
-        .box {
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            padding: 30px;
-            display: inline-block;
-        }
+<div>
+    <h1>@title</h1>
+    <p><strong>@message</strong></p>
 
-        h1 {
-            color: #e74c3c;
-        }
+    @if (HttpContext.Current.IsDebuggingEnabled)
+    {
+        <hr />
+        <p>@ViewBag.StackTrace</p>
+    }
+</div>
 
-        p.dev {
-            color: #888;
-            font-size: 0.9em;
-            margin-top: 20px;
-            white-space: pre-wrap;
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-    <div class="box">
-        <h1>@title</h1>
-        <p><strong>@message</strong></p>
-
-        @if (HttpContext.Current.IsDebuggingEnabled)
-        {
-            <hr />
-            <p class="dev">@ViewBag.StackTrace</p>
-        }
-    </div>
-</body>
-</html>

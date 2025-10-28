@@ -1,20 +1,49 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@{
     ViewBag.Title = "Home Page";
 }
 
-<main>
-    @*<section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>*@
+<main class="container mt-5">
 
-    <div class="row">
-        <button class="bg-primary text-light m-4 p-2 w-25"  onclick="location.href='@Url.Action("Index", "users")'">
-            USER
-        </button>
-        <button class="bg-success text-light m-4 p-2 w-25" onclick="location.href='@Url.Action("index", "notifications")'">
-            NOTIFICATION
-        </button>
+    <!-- Khu vực các nút Auth -->
+    <div class="d-flex justify-content-end align-items-center mb-4">
+        @if (Request.IsAuthenticated)
+        {
+            <span class="me-3 text-secondary">
+                Xin chào, <strong>@User.Identity.GetUserName()</strong>!
+            </span>
+            <form action="@Url.Action("Logout", "User")" method="get" class="d-inline">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-outline-danger">
+                    <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
+                </button>
+            </form>
+        }
+        else
+        {
+            <a href="@Url.Action("Register", "User")" class="btn btn-outline-primary me-2">
+                <i class="bi bi-person-plus me-1"></i> Đăng ký
+            </a>
+            <a href="@Url.Action("Login", "User")" class="btn btn-primary">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
+            </a>
+        }
+    </div>
+
+    <!-- Nội dung chính -->
+    <div class="row text-center justify-content-center">
+        <div class="col-md-4">
+            <button class="btn btn-primary w-100 py-3 shadow-sm"
+                    onclick="location.href='@Url.Action("Index", "Users")'">
+                <i class="bi bi-people-fill me-2"></i> QUẢN LÝ USER
+            </button>
+        </div>
+
+        <div class="col-md-4">
+            <button class="btn btn-success w-100 py-3 shadow-sm"
+                    onclick="location.href='@Url.Action("Index", "Notifications")'">
+                <i class="bi bi-bell-fill me-2"></i> THÔNG BÁO
+            </button>
+        </div>
     </div>
 </main>

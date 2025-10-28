@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,6 +26,23 @@ namespace WebApplication.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult TestConnection()
+        {
+            var connStr = System.Configuration.ConfigurationManager.ConnectionStrings["AppDbContext"].ConnectionString;
+            try
+            {
+                using (var conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+                    return Content("✅ Connected to SQL Server successfully!");
+                }
+            }
+            catch (Exception ex)
+            {
+                return Content("❌ Connection failed: " + ex.Message);
+            }
         }
     }
 }

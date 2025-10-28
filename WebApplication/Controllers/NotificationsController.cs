@@ -14,6 +14,7 @@ using WebApplication.Application.UserApplication;
 
 namespace WebApplication.Controllers
 {
+    [Authorize]
     public class NotificationsController : Controller
     {
 

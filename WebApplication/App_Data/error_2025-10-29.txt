@@ -1,0 +1,343 @@
+=== ERROR at 2025-10-29 00:47:49 ===
+Message: A public action method 'Login' was not found on controller 'WebApplication.Controllers.UsersController'.
+Source: System.Web.Mvc
+TargetSite: Void HandleUnknownAction(System.String)
+StackTrace:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+=== ERROR at 2025-10-29 00:48:49 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 00:49:05 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 00:49:37 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 00:49:47 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 00:52:05 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 00:54:54 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:03:00 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:19:15 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:19:19 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:29:04 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:30:49 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:31:11 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:31:13 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:31:14 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:31:14 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:31:14 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:31:22 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:31:25 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:33:20 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:37:14 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:37:19 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:37:44 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:38:38 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:42:31 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:42:50 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:43:00 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:43:09 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:43:18 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:53:30 ===
+Message: The controller for path '/TestConnection' was not found or does not implement IController.
+Source: System.Web.Mvc
+TargetSite: System.Web.Mvc.IController GetControllerInstance(System.Web.Routing.RequestContext, System.Type)
+StackTrace:    at System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   at System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   at System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+=== ERROR at 2025-10-29 01:54:08 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:55:16 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 01:58:30 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:01:37 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:02:07 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:03:11 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:03:40 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:03:40 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:10:56 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:11:26 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:28:11 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:28:40 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:31:50 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:33:04 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:33:33 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:37:14 ===
+Message: Internal Server Error
+Source: 
+TargetSite: 
+StackTrace: 
+
+=== ERROR at 2025-10-29 02:42:31 ===
+Message: No matching action was found on controller 'WebApplication.Controllers.UsersController'. This can happen when a controller uses RouteAttribute for routing, but no action on that controller matches the request.
+Source: System.Web.Mvc
+TargetSite: Void HandleUnknownAction(System.String)
+StackTrace:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+=== ERROR at 2025-10-29 02:54:01 ===
+Message: No matching action was found on controller 'WebApplication.Controllers.UsersController'. This can happen when a controller uses RouteAttribute for routing, but no action on that controller matches the request.
+Source: System.Web.Mvc
+TargetSite: Void HandleUnknownAction(System.String)
+StackTrace:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+=== ERROR at 2025-10-29 02:55:11 ===
+Message: No matching action was found on controller 'WebApplication.Controllers.UsersController'. This can happen when a controller uses RouteAttribute for routing, but no action on that controller matches the request.
+Source: System.Web.Mvc
+TargetSite: Void HandleUnknownAction(System.String)
+StackTrace:    at System.Web.Mvc.Controller.HandleUnknownAction(String actionName)
+   at System.Web.Mvc.Controller.<>c.<BeginExecuteCore>b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.<>c.<BeginProcessRequest>b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)
+   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)
+   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   at System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)
+   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
