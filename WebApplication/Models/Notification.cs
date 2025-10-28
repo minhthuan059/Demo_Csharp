@@ -21,11 +21,5 @@ namespace WebApplication.Models
 
         [DataType(DataType.DateTime)]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public override string ToString()
-        {
-            string userNames = Users != null ? string.Join(", ", Users.Select(u => u.Username)) : "No Users";
-            return $"NOTIFICATION: {Id} | {Message} | {CreatedAt} | {userNames}";
-        }
     }
 }

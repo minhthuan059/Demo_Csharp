@@ -63,9 +63,9 @@ namespace WebApplication.Repositories
             {
                 throw new Exception("User not found");
             }
-            existingUser.Username = entity.Username;
+            existingUser.UserName = entity.UserName;
             existingUser.Email = entity.Email;
-            existingUser.Password = entity.Password;
+            existingUser.PasswordHash = entity.PasswordHash;
             db.Entry(existingUser).State = EntityState.Modified;
             var result = await db.SaveChangesAsync();
             if (result <= 0)

@@ -371,13 +371,9 @@
     <Compile Include="Interfaces\Repositories\BaseFeatures\IUpdateRepository.cs" />
     <Compile Include="Interfaces\Repositories\Models\INotificationRepository.cs" />
     <Compile Include="Interfaces\Repositories\Models\IUserRepository.cs" />
-    <Compile Include="Migrations\202510250800296_InitialCreate.cs" />
-    <Compile Include="Migrations\202510250800296_InitialCreate.Designer.cs">
-      <DependentUpon>202510250800296_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202510250827154_InitialCreate2.cs" />
-    <Compile Include="Migrations\202510250827154_InitialCreate2.Designer.cs">
-      <DependentUpon>202510250827154_InitialCreate2.cs</DependentUpon>
+    <Compile Include="Migrations\202510281432539_initDb.cs" />
+    <Compile Include="Migrations\202510281432539_initDb.Designer.cs">
+      <DependentUpon>202510281432539_initDb.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppDbContext.cs" />
@@ -479,11 +475,8 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202510250800296_InitialCreate.resx">
-      <DependentUpon>202510250800296_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202510250827154_InitialCreate2.resx">
-      <DependentUpon>202510250827154_InitialCreate2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202510281432539_initDb.resx">
+      <DependentUpon>202510281432539_initDb.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

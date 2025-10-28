@@ -7,17 +7,17 @@ using System.Web;
 
 namespace WebApplication.Models
 {
-    public class AppDbContext : DbContext//: IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext() : base("Name=AppDbContext")
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppDbContext>());
-            //Database.SetInitializer<AppDbContext>(null);
-            //Configuration.LazyLoadingEnabled = false;
-            //Configuration.ProxyCreationEnabled = false;
+            //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<AppDbContext>());
+            ////Database.SetInitializer<AppDbContext>(null);
+            ////Configuration.LazyLoadingEnabled = false;
+            ////Configuration.ProxyCreationEnabled = false;
         }
 
-        public DbSet<User> Users { get; set; }
+        public static AppDbContext Create() => new AppDbContext();
         public DbSet<Notification> Notifications { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

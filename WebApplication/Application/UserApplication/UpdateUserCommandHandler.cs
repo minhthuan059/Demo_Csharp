@@ -15,7 +15,7 @@ namespace WebApplication.Application.UserApplication
         public string Id { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
     }
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, User>
     {
@@ -29,9 +29,9 @@ namespace WebApplication.Application.UserApplication
             return await _userRepository.UpdateAsync(new User
             {
                 Id = request.Id,
-                Username = request.UserName,
+                UserName = request.UserName,
                 Email = request.Email,
-                Password = request.Password
+                PasswordHash = request.PasswordHash
             });
         }
     }

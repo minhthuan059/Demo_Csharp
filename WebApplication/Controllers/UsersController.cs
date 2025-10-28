@@ -49,13 +49,13 @@ namespace WebApplication.Controllers
 
         // POST: Users/Create
         [HttpPost]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Username,Email,Password")] User user)
+        public async Task<ActionResult> Create([Bind(Include = "Id,UserName,Email,PasswordHash")] User user)
         {
             var createdUser = await _mediator.Send(new CreateUserCommand
             {
-                UserName = user.Username,
+                UserName = user.UserName,
                 Email = user.Email,
-                Password = user.Password
+                PasswordHash = user.PasswordHash
             });
 
             if (createdUser == null)
@@ -79,14 +79,14 @@ namespace WebApplication.Controllers
 
         // POST: Users/Edit/5
         [HttpPost]
-        public async Task<ActionResult> Edit([Bind(Include = "Id,Username,Email,Password")] User user)
+        public async Task<ActionResult> Edit([Bind(Include = "Id,UserName,Email,PasswordHash")] User user)
         {
             var updatedUser = await _mediator.Send(new UpdateUserCommand
             {
                 Id = user.Id.ToString(),
-                UserName = user.Username,
+                UserName = user.UserName,
                 Email = user.Email,
-                Password = user.Password
+                PasswordHash = user.PasswordHash
             });
 
             if (updatedUser == null)
